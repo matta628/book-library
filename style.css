@@ -12,18 +12,12 @@ body{
   grid: "sidebar header" 1fr 
         "sidebar books" 5fr/
         1fr 4fr;
+  min-width: 600px;
 }
 
 .form{
-  text-align: center;
-  background-color: #c2c8c6;
-  /*
-  lightest #c2c8c6
-  middle #3f4e4f
-  darkest #2c3639
-  */
   height: 60%;
-  width: 50%;
+  width: 40%;
   position: absolute;
   margin: auto;
   top: 0;
@@ -32,8 +26,13 @@ body{
   right: 0;
   z-index: 10;
   border-radius: 10%;
-  padding: 10%;
+  padding: 10vh;
   box-sizing: border-box;
+  display: grid;
+  text-align: center;
+  place-content: center;
+  background-color: #271d20;
+  color: #bdac86;
 }
 
 li {
@@ -42,6 +41,85 @@ li {
 
 .hide{
   display:none;
+}
+
+.form-wrapper{
+  height: 100%;
+  display: grid;
+  grid: "title title" 1fr
+  "author author" 1fr
+  "pages read" 1fr
+  "buttons buttons" 1fr
+  / 1fr 1fr;
+  gap: 5vh;
+  max-width: 300px;
+  min-width: 215px;
+  place-content: center;
+  place-items: center;
+}
+
+.form .title{
+  grid-area: title;
+}
+.form .author{
+  grid-area: author;
+}
+.form .pages{
+  grid-area: pages;
+}
+.form .read{
+  grid-area: read;
+}
+.form .buttons{
+  grid-area: buttons;
+}
+
+.form-row {
+  width: 100%;
+  max-width: 300px;
+}
+
+.form-row.pages{
+  max-width: 50px;
+  justify-self: left;
+}
+
+.form-row.buttons{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.form-row:last-of-type input{
+  color: #271d20;
+  background-color: #bdac86;  
+  font-size: 2vh;
+  font-weight: 700;
+  height: 7vh;
+  width: 12vh;
+  border-radius: 2vh;
+}
+
+.form-item{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.form-row input[type='text'],
+.form-row input[type='number'] {
+  background-color: #bdac86;
+  height: 3vh;
+  border-radius: 10px;
+  padding-left: 10px;
+
+}
+
+.form-item.radio{
+  justify-items: left;
+  padding-left: 15px;
+}
+
+label{
+  text-align: left;
 }
 
 .header{
@@ -78,7 +156,7 @@ li {
   display: grid;
   place-items: center;
 }
-input[type='button']{
+.sidebar input[type='button']{
   font-size: 2vh;
   font-weight: 700;
   background-color: #bdac86;
@@ -132,21 +210,21 @@ input[type='button']{
   text-align: center;
 }
 
-.title{
+.book-card .title{
   grid-area: title;
   font-size: 30px;
   overflow: hidden;
 }
 
-.author{
+.book-card .author{
   grid-area: author;
   font-size: 20px;
 }
-.read{
+.book-card .read{
   grid-area: read;
   font-size: 15px;
 }
-.pages{
+.book-card .pages{
   grid-area: pages;
   font-size: 15px;
 }
