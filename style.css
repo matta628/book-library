@@ -46,7 +46,7 @@ body{
   height: 300px;
   border: 5px solid black;
   display: grid;
-  grid: "title title" 2fr
+  grid: "title title" 4fr
         "author author" 1fr
         "read pages" 1fr
         / 1fr 1fr;
@@ -70,26 +70,28 @@ body{
   right: -20px;
 }
 
-
-
 .book-card div{
   color: #f2e7e3;
+  text-align: center;
 }
 
 .title{
   grid-area: title;
-  font-size: 50px;
+  font-size: 30px;
+  overflow: hidden;
 }
 
 .author{
   grid-area: author;
-  font-size: 30px;
+  font-size: 20px;
 }
 .read{
   grid-area: read;
+  font-size: 15px;
 }
 .pages{
   grid-area: pages;
+  font-size: 15px;
 }
 
 .book-card:nth-child(5n+1){
