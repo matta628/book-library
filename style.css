@@ -16,17 +16,18 @@ body{
 }
 
 .form{
-  height: 60%;
-  width: 40%;
+  font-size: 20px;
+  height: 500px;
+  width: 500px;
   position: absolute;
   margin: auto;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 15;
   border-radius: 10%;
-  padding: 10vh;
+  padding: 50px;
   box-sizing: border-box;
   display: grid;
   text-align: center;
@@ -51,7 +52,7 @@ li {
   "pages read" 1fr
   "buttons buttons" 1fr
   / 1fr 1fr;
-  gap: 5vh;
+  gap: 25px;
   max-width: 300px;
   min-width: 215px;
   place-content: center;
@@ -92,11 +93,11 @@ li {
 .form-row:last-of-type input{
   color: #271d20;
   background-color: #bdac86;  
-  font-size: 2vh;
+  font-size: 16px;
   font-weight: 700;
-  height: 7vh;
-  width: 12vh;
-  border-radius: 2vh;
+  height: 50px;
+  width: 100px;
+  border-radius: 25px;
 }
 
 .form-item{
@@ -107,7 +108,7 @@ li {
 .form-row input[type='text'],
 .form-row input[type='number'] {
   background-color: #bdac86;
-  height: 3vh;
+  height: 25px;
   border-radius: 10px;
   padding-left: 10px;
 
@@ -124,12 +125,14 @@ label{
 
 .header{
   grid-area: header;
+  place-items: center;
   background-color: #bdac86;
   position: sticky;
+  z-index: 5;
 }
 .header-title{
   color: #421220;
-  font-size: 10vh;
+  font-size: 84px;
   text-align: center;
   font-weight: 700;
 }
@@ -138,13 +141,14 @@ label{
   grid-area: sidebar;
   background-color: #271d20;
   display: grid;
-  grid-auto-rows: 10vh;
+  grid-auto-rows: 100px;
   gap: 10px;
+  z-index: 10;
 }
 
 .menu{
   color: #bdac86;
-  font-size: 7vh;
+  font-size: 72px;
   text-align: center;
 }
 
@@ -157,13 +161,13 @@ label{
   place-items: center;
 }
 .sidebar input[type='button']{
-  font-size: 2vh;
-  font-weight: 700;
   background-color: #bdac86;
   color: #421220;
-  height: 7vh;
-  width: 12vh;
-  border-radius: 2vh;
+  font-size: 16px;
+  font-weight: 700;
+  height: 50px;
+  width: 100px;
+  border-radius: 25px;
 }
 
 .books {
@@ -188,6 +192,10 @@ label{
   place-content: center;
   place-items: center;
   position: relative;
+}
+
+.book-card, .header, .sidebar, .form{
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .book-card img {
