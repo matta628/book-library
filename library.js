@@ -127,4 +127,16 @@ function main() {
   displayBooks();
 }
 
+const addBookButton = document.querySelector('#add-book-button');
+const cancelButton = document.querySelector('.cancel-add');
+const formContainer = document.querySelector('#hidden-form');
+addBookButton.addEventListener('click', () => {
+  formContainer.classList.remove('hide');
+  cancelButton.classList.remove('hide');
+});
+cancelButton.addEventListener('click', () => {
+  formContainer.classList.add('hide');
+  cancelButton.classList.add('hide');
+});
+
 main();

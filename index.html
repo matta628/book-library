@@ -9,7 +9,7 @@
   <title>Library</title>
 </head>
 <body>
-  <div class="form not-selected">
+  <div id="hidden-form" class="form hide">
     <form action="">
       <ul class="form-wrapper">
         <div class="form-row">
@@ -39,7 +39,7 @@
           </li>
         </div>
         <div class="form-row">
-          <div class="cancel-button">
+          <div class="reset-button">
             <input type="reset">
           </div>
           <div class="submit-button">
@@ -55,7 +55,10 @@
   <div class="sidebar">
     <div class="menu">Menu</div>
     <div class="add-book">
-      <input type="button" value="Add Book">
+      <input type="button" value="Add Book" id="add-book-button">
+    </div>
+    <div class="cancel-add hide">
+      <input type="button" value="Cancel Add" id="cancel-add-button">
     </div>
   </div>
   <div class="books">
