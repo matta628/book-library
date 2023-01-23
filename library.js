@@ -1,9 +1,9 @@
 const myLibrary = [];
 
-function Book(title, author, numPages, read) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
-  this.numPages = numPages;
+  this.pages = pages;
   this.read = read;
 }
 
@@ -13,6 +13,51 @@ function addBookToLibrary(book) {
   // create book object
 
   myLibrary.push(book);
+}
+
+function appendRemoveButtonChild(bookCard) {
+  const removeButton = document.createElement('div');
+  removeButton.classList.add('remove', 'hide');
+  const removeSVG = document.createElement('img');
+  removeSVG.src = 'icon/delete.svg';
+  removeSVG.alt = 'remove icon';
+  removeButton.appendChild(removeSVG);
+  bookCard.appendChild(removeButton);
+}
+
+function createBookCard(book) {
+  const bookCard = document.createElement('div');
+  bookCard.classList.add('book-card');
+  appendRemoveButtonChild(bookCard);
+
+  const title = document.createElement('div');
+  title.textContent = book.title;
+  title.classList.add('title');
+  bookCard.appendChild(title);
+
+  const author = document.createElement('div');
+  author.textContent = book.author;
+  author.classList.add('author');
+  bookCard.appendChild(author);
+
+  const pages = document.createElement('div');
+  pages.textContent = `${book.pages} pp.`;
+  pages.classList.add('pages');
+  bookCard.appendChild(pages);
+
+  const read = document.createElement('div');
+  read.textContent = (book.read) ? 'Read' : 'Not Read';
+  read.classList.add('read');
+  bookCard.appendChild(read);
+  return bookCard;
+}
+
+function displayBooks() {
+  const bookSection = document.querySelector('.books');
+  for (let i = 0; i < myLibrary.length; i++) {
+    const bookCard = createBookCard(myLibrary[i]);
+    bookSection.appendChild(bookCard);
+  }
 }
 
 function main() {
@@ -79,6 +124,7 @@ function main() {
     true,
   );
   addBookToLibrary(oneHundredYears);
+  displayBooks();
 }
 
 main();

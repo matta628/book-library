@@ -34,8 +34,7 @@ body{
   padding: 50px;
   background-image: url('img/bookshelf.jpeg');
   grid-area: books;
-
-
+  overflow-y: scroll;
   display: grid;
   grid-auto-rows: 1fr;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
