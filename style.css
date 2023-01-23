@@ -20,7 +20,7 @@ body{
 }
 .header-title{
   color: #421220;
-  font-size: 84px;
+  font-size: 10vh;
   text-align: center;
   font-weight: 700;
 }
@@ -39,8 +39,7 @@ body{
   display: grid;
   grid-auto-rows: 1fr;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 30px;
-
+  gap: 50px;
 }
 
 .book-card{
@@ -53,7 +52,25 @@ body{
         / 1fr 1fr;
   place-content: center;
   place-items: center;
+  position: relative;
 }
+
+.book-card img {
+  height: 50px;
+}
+
+.hide{
+  display: none;  
+}
+
+.book-card:hover .hide{
+  display: block;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+}
+
+
 
 .book-card div{
   color: #f2e7e3;
