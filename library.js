@@ -1,12 +1,13 @@
 const myLibrary = [];
+let uniqueID = 0;
 const colors = ['#012908', '#ec8e00', '#820100', '#03285c', '#3c1460'];
 
-function Book(title, author, pages, read, index) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = +pages;
   this.read = read;
-  this.index = index;
+  this.id = uniqueID++;
   const randomIndex = Math.floor(Math.random() * colors.length);
   this.color = colors[randomIndex];
 }
@@ -56,7 +57,7 @@ function createBookCard(book) {
 function addBookAsCard(book) {
   const bookSection = document.querySelector('.books');
   const bookCard = createBookCard(book);
-  bookCard.classList.add(`card-${book.index}`);
+  bookCard.classList.add(`card-${book.id}`);
   bookSection.appendChild(bookCard);
 }
 
@@ -72,7 +73,6 @@ function main() {
     'Joseph Heller',
     453,
     false,
-    0,
   );
   addBookToLibrary(catch22);
   const oxygenThief = new Book(
@@ -80,7 +80,6 @@ function main() {
     'Anonymous',
     143,
     true,
-    1,
   );
   addBookToLibrary(oxygenThief);
   const mathWithoutNums = new Book(
@@ -158,7 +157,7 @@ function getFormInput(event) {
     readValue = true;
   }
 
-  const book = new Book(title, author, pages, readValue, myLibrary.length);
+  const book = new Book(title, author, pages, readValue);
   addBookToLibrary(book);
   addBookAsCard(book);
   event.preventDefault();
@@ -166,6 +165,15 @@ function getFormInput(event) {
 form.addEventListener('submit', getFormInput);
 
 main();
+
+function removeBookByID(id) {
+  for (let i = 0; i < myLibrary.length; i++) {
+    if (myLibrary[i].id === id) {
+      myLibrary.splice(i, 1);
+      return;
+    }
+  }
+}
 
 const removeButtons = document.querySelectorAll('.remove');
 removeButtons.forEach((button) => {
@@ -175,8 +183,8 @@ removeButtons.forEach((button) => {
     const classList = bookCard.className.split(' ');
     for (let i = 0; i < classList.length; i++) {
       if (classList[i][0] === 'c') {
-        const index = classList[i].split('-')[1];
-        myLibrary.splice(index, 1);
+        const id = +classList[i].split('-')[1];
+        removeBookByID(id);
       }
     }
   });
