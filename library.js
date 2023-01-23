@@ -1,10 +1,11 @@
 const myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, index) {
   this.title = title;
   this.author = author;
   this.pages = +pages;
   this.read = read;
+  this.index = index;
 }
 
 function addBookToLibrary(book) {
@@ -51,6 +52,7 @@ function createBookCard(book) {
 function addBookAsCard(book) {
   const bookSection = document.querySelector('.books');
   const bookCard = createBookCard(book);
+  bookCard.classList.add(`card-${book.index}`);
   bookSection.appendChild(bookCard);
 }
 
@@ -66,6 +68,7 @@ function main() {
     'Joseph Heller',
     453,
     false,
+    0,
   );
   addBookToLibrary(catch22);
   const oxygenThief = new Book(
@@ -73,9 +76,9 @@ function main() {
     'Anonymous',
     143,
     true,
+    1,
   );
   addBookToLibrary(oxygenThief);
-  /*
   const mathWithoutNums = new Book(
     'Math Without Numbers',
     'Milo Beckman',
@@ -125,7 +128,6 @@ function main() {
     true,
   );
   addBookToLibrary(oneHundredYears);
-  */
   displayBooks();
 }
 
@@ -152,12 +154,33 @@ function getFormInput(event) {
     readValue = true;
   }
 
-  const book = new Book(title, author, pages, readValue);
+  const book = new Book(title, author, pages, readValue, myLibrary.length);
   addBookToLibrary(book);
   addBookAsCard(book);
   event.preventDefault();
 }
-
 form.addEventListener('submit', getFormInput);
 
 main();
+
+const removeButtons = document.querySelectorAll('.remove');
+removeButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const bookCard = button.parentElement;
+    bookCard.parentElement.removeChild(bookCard);
+    const classList = bookCard.className.split(' ');
+    for (let i = 0; i < classList.length; i++) {
+      if (classList[i][0] === 'c') {
+        const index = classList[i].split('-')[1];
+        myLibrary.splice(index, 1);
+      }
+    }
+  });
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    formContainer.classList.add('hide');
+    cancelButton.classList.add('hide');
+  }
+});
