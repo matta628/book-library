@@ -8,10 +8,6 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(book) {
-  // take user input
-
-  // create book object
-
   myLibrary.push(book);
 }
 
@@ -52,11 +48,15 @@ function createBookCard(book) {
   return bookCard;
 }
 
-function displayBooks() {
+function addBookAsCard(book) {
   const bookSection = document.querySelector('.books');
+  const bookCard = createBookCard(book);
+  bookSection.appendChild(bookCard);
+}
+
+function displayBooks() {
   for (let i = 0; i < myLibrary.length; i++) {
-    const bookCard = createBookCard(myLibrary[i]);
-    bookSection.appendChild(bookCard);
+    addBookAsCard(myLibrary[i]);
   }
 }
 
@@ -75,6 +75,7 @@ function main() {
     true,
   );
   addBookToLibrary(oxygenThief);
+  /*
   const mathWithoutNums = new Book(
     'Math Without Numbers',
     'Milo Beckman',
@@ -124,6 +125,7 @@ function main() {
     true,
   );
   addBookToLibrary(oneHundredYears);
+  */
   displayBooks();
 }
 
@@ -138,5 +140,24 @@ cancelButton.addEventListener('click', () => {
   formContainer.classList.add('hide');
   cancelButton.classList.add('hide');
 });
+
+const form = document.getElementById('form');
+function getFormInput(event) {
+  const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  const pages = document.getElementById('pages').value;
+  const readRadio = document.getElementsByName('read');
+  let readValue = false;
+  if (readRadio[0].id === 'already-read' && readRadio[0].checked) {
+    readValue = true;
+  }
+
+  const book = new Book(title, author, pages, readValue);
+  addBookToLibrary(book);
+  addBookAsCard(book);
+  event.preventDefault();
+}
+
+form.addEventListener('submit', getFormInput);
 
 main();
