@@ -1,4 +1,5 @@
 const myLibrary = [];
+const colors = ['#012908', '#ec8e00', '#820100', '#03285c', '#3c1460'];
 
 function Book(title, author, pages, read, index) {
   this.title = title;
@@ -6,6 +7,8 @@ function Book(title, author, pages, read, index) {
   this.pages = +pages;
   this.read = read;
   this.index = index;
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  this.color = colors[randomIndex];
 }
 
 function addBookToLibrary(book) {
@@ -25,6 +28,7 @@ function appendRemoveButtonChild(bookCard) {
 function createBookCard(book) {
   const bookCard = document.createElement('div');
   bookCard.classList.add('book-card');
+  bookCard.style.backgroundColor = book.color;
   appendRemoveButtonChild(bookCard);
 
   const title = document.createElement('div');
