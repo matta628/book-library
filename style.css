@@ -232,6 +232,13 @@ label{
   grid-area: read;
   font-size: 15px;
 }
+button.read{
+  color: #f2e7e3;
+  background-color: transparent;
+  width: 80%;
+  height: 50%;
+}
+
 .book-card .pages{
   grid-area: pages;
   font-size: 15px;

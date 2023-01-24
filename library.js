@@ -47,10 +47,21 @@ function createBookCard(book) {
   pages.classList.add('pages');
   bookCard.appendChild(pages);
 
-  const read = document.createElement('div');
+  const read = document.createElement('button');
   read.textContent = (book.read) ? 'Read' : 'Not Read';
   read.classList.add('read');
   bookCard.appendChild(read);
+  read.addEventListener('click', () => {
+    const bookId = +read.parentElement.className.split(' ')[1].split('-')[1];
+    let bookObj = myLibrary[0];
+    for (let i = 0; i < myLibrary.length; i++) {
+      if (myLibrary[i].id === bookId) {
+        bookObj = myLibrary[i];
+      }
+    }
+    bookObj.read = !bookObj.read;
+    read.textContent = (book.read) ? 'Read' : 'Not Read';
+  });
   return bookCard;
 }
 
