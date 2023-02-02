@@ -1,19 +1,32 @@
 const myLibrary = [];
-let uniqueID = 0;
-const colors = ['#012908', '#ec8e00', '#820100', '#03285c', '#3c1460'];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = +pages;
-  this.read = read;
-  this.id = uniqueID++;
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  this.color = colors[randomIndex];
+class Book {
+  static uniqueID = 0;
+
+  #colors = ['#012908', '#ec8e00', '#820100', '#03285c', '#3c1460'];
+
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = +pages;
+    this.read = read;
+    this.id = this.uniqueID++;
+    const randomIndex = Math.floor(Math.random() * this.#colors.length);
+    this.color = this.#colors[randomIndex];
+  }
 }
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
+}
+
+function removeBookByID(id) {
+  for (let i = 0; i < myLibrary.length; i++) {
+    if (myLibrary[i].id === id) {
+      myLibrary.splice(i, 1);
+      return;
+    }
+  }
 }
 
 function appendRemoveButtonChild(bookCard) {
@@ -22,6 +35,16 @@ function appendRemoveButtonChild(bookCard) {
   const removeSVG = document.createElement('img');
   removeSVG.src = 'icon/delete.svg';
   removeSVG.alt = 'remove icon';
+  removeButton.addEventListener('click', () => {
+    bookCard.parentElement.removeChild(bookCard);
+    const classList = bookCard.className.split(' ');
+    for (let i = 0; i < classList.length; i++) {
+      if (classList[i][0] === 'c') {
+        const id = +classList[i].split('-')[1];
+        removeBookByID(id);
+      }
+    }
+  });
   removeButton.appendChild(removeSVG);
   bookCard.appendChild(removeButton);
 }
@@ -176,30 +199,6 @@ function getFormInput(event) {
 form.addEventListener('submit', getFormInput);
 
 main();
-
-function removeBookByID(id) {
-  for (let i = 0; i < myLibrary.length; i++) {
-    if (myLibrary[i].id === id) {
-      myLibrary.splice(i, 1);
-      return;
-    }
-  }
-}
-
-const removeButtons = document.querySelectorAll('.remove');
-removeButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const bookCard = button.parentElement;
-    bookCard.parentElement.removeChild(bookCard);
-    const classList = bookCard.className.split(' ');
-    for (let i = 0; i < classList.length; i++) {
-      if (classList[i][0] === 'c') {
-        const id = +classList[i].split('-')[1];
-        removeBookByID(id);
-      }
-    }
-  });
-});
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
